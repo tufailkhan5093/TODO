@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container-fluid">
+  <div class="p-4 m-4">
+    <div class="col-lg-8 mx-auto">
+      <h3 class="alert alert-info border rounded text-center">Create Note</h3> 
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label for="">Titlet</label>
+            <input type="text" name="title" id="" class="form-control" />
+    
+            <label for="">Description</label>
+            <input type="text" name="body" id="" class="form-control"  style="height: 180px; margin-bottom: 20px;"/>
+
+           
+
+              <input type="submit" value="Save" class="btn btn-info float-right col-lg-1 ml-2">
+              <a type="button" class="btn btn-danger float-right" href="{% url 'home' %}"><i class="fa fa-arrow-left"></i> Back</a>
+              
+              
+
+
+
+        </form>
+        
+      
+      
+    </div>
+  </div>
+</div>
+{% endblock content%}

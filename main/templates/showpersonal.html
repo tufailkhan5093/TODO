@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container-fluid">
+  <div class="p-4 m-4">
+    <h3 class="alert alert-info border rounded text-center col-lg-8 mx-auto">
+      Personal Information
+    </h3>
+
+    {% if not pi %}
+    <div class="p-5 text-center">
+      <a href="{% url 'personal' %}" class="btn btn-info btn-lg col-lg-3">Add Info</a>
+    </div>
+    {% else %}
+    <div class="col-lg-8 mx-auto border">
+      {% for i in pi %}
+
+      <div>
+        <table class="mx-auto table table-hover">
+          <thead>
+            <tr class="bg-info text-white">
+              <th>BIO</th>
+              <th>INOFMATION</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td style="font-style: italic">Name</td>
+              <th>{{i.firstname}} {{i.lastname}}</th>
+            </tr>
+
+            <tr>
+              <td style="font-style: italic">Father Name</td>
+              <th>{{i.fathername}}</th>
+            </tr>
+
+            <tr>
+              <td style="font-style: italic">Phone</td>
+              <th>{{i.phone}}</th>
+            </tr>
+
+            <tr>
+              <td style="font-style: italic">Email</td>
+              <th>{{i.email}}</th>
+            </tr>
+
+            <tr>
+              <td style="font-style: italic">Address</td>
+              <th>{{i.address}}</th>
+            </tr>
+
+            <tr>
+              <td style="font-style: italic">Date of Birth</td>
+              <th>{{i.dob}}</th>
+            </tr>
+
+            <tr>
+              <td style="font-style: italic">State</td>
+              <th>{{i.state}}</th>
+            </tr>
+
+            <tr>
+              <td>Postal</td>
+              <th>{{i.postal}}</th>
+            </tr>
+
+            <tr>
+              <td style="font-style: italic">Country</td>
+              <th>{{i.country}}</th>
+            </tr>
+
+            <tr>
+              <td style="font-style: italic">Nick Name</td>
+              <th>{{i.nickname}}</th>
+            </tr>
+
+            <tr>
+              <td style="font-style: italic">Qualification</td>
+              <th>{{i.qualification}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <a type="button" class="btn btn-danger float-right my-3 ml-2" href="{% url 'home' %}"><i
+          class="fa fa-arrow-left"></i> Back</a>
+      <a type="button" class="btn btn-warning float-right my-3" href="{% url 'deletepersonal' i.id %}"><i
+          class="fa fa-recycle"></i>Delete</a>
+
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock content%}

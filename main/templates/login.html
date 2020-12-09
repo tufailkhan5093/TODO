@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container-fluid">
+  <div class="p-4 m-4">
+    <div class="col-lg-4 mx-auto">
+      <h3 class="alert alert-info border rounded text-center">Login</h3> 
+      <form action="" method="POST">
+        {% csrf_token %}
+        
+        {% for fm in form %}
+    <div class="form-group"
+    {{fm.label_tag}} {{fm}} 
+    {% endfor %}
+    <input type="submit" value="Login" class="btn btn-info my-4">
+        
+
+       
+
+        <br>
+          <small class="float-right">If not Registered, Click here to 
+            <a class="btn btn-sm btn-outline-info btn-round" href="{% url 'signup' %}">
+            Signup</a></small>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content%}

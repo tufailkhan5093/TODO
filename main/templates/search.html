@@ -1,0 +1,84 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+
+<div class="container my-4 mx-4 text-center " style="padding-left: 180px; margin-left: 30px;">
+
+    {% if not object_list %}
+    <h1>No Search Result ! </h1>
+    
+    {% else %}
+    <h1>Search Result</h1>
+      
+    
+      <div class="border mt-4">
+
+        
+       
+       
+        <table  class="mx-auto table table-hover bg-white">
+          <thead>
+          <tr>
+          <th scope="col" style="width:1%">S.no</th>
+          <th scope="col" style="width: 5%;">Title</th>
+          <th scope="col" style="width: 5%;">Actions</th>
+          
+        </tr>
+      </thead>
+        
+      {% for post in object_list %}
+       
+        <tbody>
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td><a href="{% url 'postdetail' post.id %}" style="color: black;"><h4>{{post.title}}</h4></a></td>
+  
+            <td ><a type="button" class="btn btn-info" href="{% url 'postdetail' post.id %}"><i class="fa fa-television"></i>View</a>
+              <a type="button" class="btn btn-danger" href="{% url 'delete' post.id %}"><i class="fa fa-recycle"></i>Delete</a>
+              
+              <a type="button" class="btn btn-warning" href="{% url 'updatepost' post.id %}"><i class="fa fa-edit"></i>Edit</a>
+             
+          </td>
+          
+            
+          </tr>
+        </tbody>
+        {% endfor %} 
+       
+        </table>
+        
+      </div>
+    
+      
+      {% endif %}
+
+</div>
+<div class="text-center">
+
+      {% if is_paginated %}
+  <a class="btn btn-outline-primary" href="?page=1" role="button">First</a>
+
+  {% if page_obj.has_previous %}
+  <a
+    class="btn btn-outline-primary"
+    href="?page={{page_obj.previous_page_number}}"
+    >Previous</a
+  >
+  {% endif %}
+  {% if page_obj.number != 1 %}
+
+  <a class="btn btn-primary" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
+  {% endif %}
+
+  {% if page_obj.has_next %}
+  <a class="btn btn-outline-primary" href="?page={{page_obj.next_page_number}}"
+    >Next</a
+  >
+  {% endif %} 
+  
+  {% endif %}
+      
+    
+</div>
+{% endblock content %}

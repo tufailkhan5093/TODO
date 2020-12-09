@@ -1,0 +1,59 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+
+<div class="container my-4 mx-4 text-center " style="padding-left: 180px; margin-left: 30px;">
+
+    {% if not fav_list %}
+    <h1>No Favourite Note !</h1>
+    
+    {% else %}
+    <h1>Favourite Notes</h1>
+      
+    
+      <div class="border mt-4">
+
+       
+       
+       
+        <table  class="mx-auto table table-hover bg-white">
+          <thead>
+          <tr>
+          <th scope="col" style="width:1%">S.no</th>
+          <th scope="col" style="width: 5%;">Title</th>
+          <th scope="col" style="width: 5%;">Actions</th>
+          
+        </tr>
+      </thead>
+        
+  
+      {% for post in fav_list %}
+        <tbody>
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td><a href="{% url 'postdetail' post.id %}" style="color: black;"><h4>{{post.title}}</h4></a></td>
+  
+            <td ><a type="button" class="btn btn-info" href="{% url 'postdetail' post.id %}"><i class="fa fa-television"></i>View</a>
+              <a type="button" class="btn btn-danger" href="{% url 'delete' post.id %}"><i class="fa fa-recycle"></i>Delete</a>
+              
+              <a type="button" class="btn btn-warning" href="{% url 'updatepost' post.id %}"><i class="fa fa-edit"></i>Edit</a>
+             
+          </td>
+          
+            
+          </tr>
+        </tbody>
+        {% endfor %} 
+       
+        </table>
+        <a type="button" class="btn btn-danger float-right mt-3" href="{% url 'home' %}"><i class="fa fa-arrow-left"></i> Back</a>
+        
+      </div>
+    
+      
+      {% endif %}
+      
+    
+
+{% endblock content %}

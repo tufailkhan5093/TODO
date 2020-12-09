@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container-fluid">
+ 
+  <div class="p-4 m-4">
+    <h3 class="alert alert-info border rounded text-center col-lg-8 mx-auto">Note Detail</h3>
+    <div class="col-lg-8 mx-auto border">
+      
+
+      <div>
+      <h2><small style="font-style: italic;">Title : </small>{{pi.title}}</h2>
+       {% if is_fav %}
+      <a href="{% url 'fav' pi.id %}" class=" btn btn-light btn-lg"><i class="fas fa-heart text-info">  <small class="text-dark">Dislike</small></i>
+      
+      </a>
+      {% else %}
+      <a href="{% url 'fav' pi.id %}" class="btn btn-light btn-lg"><i class="far fa-heart text-info">
+        <small class="text-dark">Like</small>
+      </i>
+      
+      </a>
+      {% endif %}
+    </div>
+
+      <br>
+     
+    <small style="font-style: italic;">Description:</small>
+      <br>
+      <br>
+      
+      
+      <p>{{pi.body}}</p>
+
+     
+        
+      
+      <a type="button" class="btn btn-danger float-right mt-3" href="{% url 'home' %}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
+    
+  </div>
+</div>
+{% endblock content%}

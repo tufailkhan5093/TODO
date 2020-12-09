@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container-fluid">
+  <div class="p-4 m-4">
+    
+    <div class="col-lg-8 mx-auto">
+      <h3 class="alert alert-info border rounded text-center">Edit Note</h3>
+      
+
+     <form method="POST">
+        {% csrf_token %}
+        {{fm.as_p}}
+        
+
+        <input type="submit" value="Update" class="btn btn-info float-right ml-2">
+        <a type="button" class="btn btn-danger float-right" href="{% url 'home' %}"><i class="fa fa-arrow-left"></i> Back</a>
+
+        
+     </form>
+     
+
+     
+        
+      
+      
+    </div>
+  </div>
+</div>
+{% endblock content%}
