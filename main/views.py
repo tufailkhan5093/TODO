@@ -13,6 +13,7 @@ def home(request):
     if request.user.is_authenticated:
 
         show_post=Post.objects.filter(user=request.user).order_by('-time')
+        
     else:
         return redirect('signup')
     
