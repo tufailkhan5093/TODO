@@ -10,8 +10,11 @@ from django.views.generic import ListView
 from django.views import View
 
 def home(request):
+    if request.user.is_authenticated:
 
-    show_post=Post.objects.filter(user=request.user).order_by('-time')
+        show_post=Post.objects.filter(user=request.user).order_by('-time')
+    else:
+        return redirect('signup')
     
     return render(request,'home.html',{'posts':show_post,'homee':'active'})
 
