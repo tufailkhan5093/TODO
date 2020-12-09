@@ -20,8 +20,7 @@ def home(request):
 
 
 def post_detail(request,id):
-    user=request.user
-    if user:
+    if request.user.is_authenticated:
   
         p=Post.objects.get(pk=id)
         
@@ -35,28 +34,34 @@ def post_detail(request,id):
     return render(request,'postdetail.html',{'pi':p,'is_fav':is_fav})
 
 def update_post(request,id):
-    if request.method=='POST':
-        pi=Post.objects.get(pk=id)
-        fm=Post_Update(request.POST,instance=pi)
-        if fm.is_valid():
-            
-            pi.save()
-            messages.success(request,'Update Successfully ')
-            
-            return redirect('home')
+    if request.user.is_authenticated:
+        if request.method=='POST':
+            pi=Post.objects.get(pk=id)
+            fm=Post_Update(request.POST,instance=pi)
+            if fm.is_valid():
                 
+                pi.save()
+                messages.success(request,'Update Successfully ')
+                
+                return redirect('home')
+                    
+        else:
+            pi=Post.objects.get(pk=id)
+            fm=Post_Update(instance=pi)
     else:
-        pi=Post.objects.get(pk=id)
-        fm=Post_Update(instance=pi)
+        return redirect('login')
         
     return render(request,'updatepost.html',{'fm':fm})
 
 def delete_post(request,id):
-    
-    pi=Post.objects.get(pk=id)
-    pi.delete()
-    messages.success(request,'Post Deleted Successfully')
-    return redirect('home')
+    if request.user.is_authenticated:
+        
+        pi=Post.objects.get(pk=id)
+        pi.delete()
+        messages.success(request,'Post Deleted Successfully')
+        return redirect('home')
+    else:
+        return redirect('login')
 
 def logout_form(request):
     
@@ -66,8 +71,7 @@ def logout_form(request):
 
 
 def create_post(request):
-    user=request.user
-    if user:
+    if request.user.is_authenticated:
         
         if request.method=='POST':
             user=request.user
@@ -86,8 +90,7 @@ def create_post(request):
     return render(request,'createpost.html',{'createpost':'active'})
 
 def Personal_data(request):
-    user=request.user
-    if user:
+    if request.user.is_authenticated:
         if request.method=='POST':
        
             postData=request.POST
@@ -178,11 +181,14 @@ def user_login(request):
 
 
 def delete_personal(request,id):
+    if request.user.is_authenticated:
     
-    p=Personal.objects.get(pk=id)
-    p.delete()
-    messages.success(request,'Personal Info Successfully Deleted')
-    return redirect('home')
+        p=Personal.objects.get(pk=id)
+        p.delete()
+        messages.success(request,'Personal Info Successfully Deleted')
+        return redirect('home')
+    else:
+        return redirect('login')
 
 
     
