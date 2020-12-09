@@ -27,7 +27,7 @@ SECRET_KEY = ')1i@5+@bze^i2c*84*%tqe3ipjdrnmleds@gz7l6!&moenw%n8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['personalnotebook.heroku.com']
+ALLOWED_HOSTS = ['personalnotebook.herokuapp.com']
 
 
 # Application definition
